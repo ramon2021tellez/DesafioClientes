@@ -436,7 +436,16 @@ ALTER TABLE ONLY public.detalle_compra
 --
 -- PostgreSQL database dump complete
 --
-SELECT * FROM public.detalle_producto LIMIT 10;
-SELECT * FROM public.producto LIMIT 10;
-SELECT * FROM public.compra LIMIT 10;∫
-SELECT * FROM public.cliente LIMIT 10;
+--realizar las siguientes consultas
+--Desahabilitar el AUTOCOMMIT
+\set AUTOCOMMIT off
+--insertar un nuevo cliente
+BEGIN;
+INSERT INTO public.cliente (id, nombre, email)
+VALUES ( 11,'usuario11','usuario11@hotmail.com');
+COMMIT;
+--SELECT * FROM public.detalle_producto LIMIT 10;
+--SELECT * FROM public.producto LIMIT 10;
+--SELECT * FROM public.compra LIMIT 10;
+SELECT * FROM public.cliente WHERE id=11;
+
