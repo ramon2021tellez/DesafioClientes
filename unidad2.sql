@@ -437,6 +437,20 @@ ALTER TABLE ONLY public.detalle_compra
 -- PostgreSQL database dump complete
 --
 --realizar las siguientes consultas
+--1.cargar respaldo de la base de datos unidad.2.sql
+--2. cliente usuario 01 a realizado la siguiente compra:
+--    producto : producto9
+--    cantidad : 5
+--    fecha : fecha del sistema
+BEGIN;
+INSERT INTO public.compra (id, cliente_id , fecha)
+VALUES (1 , 'usuario1', '2021-03-03');
+INSERT INTO public.detalle_compra(id, producto_id,compra_id ,cantidad)
+VALUES ( 9 , 'producto9', 1 , 5);
+UPDATE public.producto SET stock = stock - 1 WHERE id = 9;
+SAVEPOINT checkpoint;
+--UPDATE pizzas SET stock = stock - 1 WHERE id = 2;
+--SAVEPOINT checkpoint;
 --Desahabilitar el AUTOCOMMIT
 \set AUTOCOMMIT off
 --insertar un nuevo cliente
@@ -444,8 +458,8 @@ BEGIN;
 INSERT INTO public.cliente (id, nombre, email)
 VALUES ( 11,'usuario11','usuario11@hotmail.com');
 COMMIT;
---SELECT * FROM public.detalle_producto LIMIT 10;
---SELECT * FROM public.producto LIMIT 10;
---SELECT * FROM public.compra LIMIT 10;
+SELECT * FROM public.detalle_compra LIMIT 15;
+SELECT * FROM public.compra LIMIT 15;
+SELECT * FROM public.producto LIMIT 15;
 SELECT * FROM public.cliente WHERE id=11;
 
